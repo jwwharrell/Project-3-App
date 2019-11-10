@@ -5,6 +5,7 @@ import AllCustomers from './components/customer/AllCustomers.js'
 import AddNewCustomer from './components/customer/AddNewCustomer.js'
 import SingleCustomer from './components/customer/SingleCustomer.js'
 import EntireInventory from './components/inventory/EntireInventory.js'
+import AddNewInventoryItem from './components/inventory/AddNewInventoryItem.js'
 import SingleInventoryItem from './components/inventory/SingleInventoryItem'
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/customer/create-customer" component={AddNewCustomer}/>
           <Route exact path="/customer/:customerId" component={SingleCustomer}/>
           <Route exact path="/inventory" component={EntireInventory}/>
+          <Route exact path="/inventory/new-piece" component={AddNewInventoryItem}/>
           <Route exact path="/inventory/:inventoryId" component={SingleInventoryItem}/>
         </Switch>
       </Router>
