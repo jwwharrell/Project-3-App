@@ -16,7 +16,9 @@ export default class SingleCustomer extends Component {
     }
 
     refreshCustomer = () => {
+        console.log('Mounted')
         const customer = this.props.match.params.customerId
+        console.log(customer)
         axios.get(`/api/customer/${customer}`)
             .then((res) => {
                 console.log('React Single Customer')
@@ -53,6 +55,7 @@ export default class SingleCustomer extends Component {
     }
 
     render() {
+        const selectedCustomer = this.state.updatedCustomer
         return (
             <div>
                 <h1>{selectedCustomer.firstName} {selectedCustomer.lastName}</h1>

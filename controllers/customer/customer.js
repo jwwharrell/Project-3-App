@@ -21,13 +21,14 @@ customerRouter.get('/', (req, res) => {
 customerRouter.get('/:customerId', (req, res) => {
   customerApi.getCustomerById(req.params.customerId)
     .then((singleCustomer) => {
-        inventoryApi.getAllInventorysByCustomerId(req.params.customerId)
-          .then((heldItem) => {
-            invoiceApi.getAllInvoicesByCustomerId(req.params.customerId)
-              .then((customerInvoice) => {
-                res.json({singleCustomer, heldItem, customerInvoice})
-              })
-          })
+        // inventoryApi.getAllInventorysByCustomerId(req.params.customerId)
+        //   .then((heldItem) => {
+        //     invoiceApi.getAllInvoicesByCustomerId(req.params.customerId)
+        //       .then((customerInvoice) => {
+        //         res.json({singleCustomer, heldItem, customerInvoice})
+        //       })
+        //   })
+        res.json(singleCustomer)
       })
 })
 
