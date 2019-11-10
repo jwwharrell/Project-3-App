@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 export default class SingleCustomer extends Component {
 
@@ -16,13 +17,9 @@ export default class SingleCustomer extends Component {
     }
 
     refreshCustomer = () => {
-        console.log('Mounted')
         const customer = this.props.match.params.customerId
-        console.log(customer)
         axios.get(`/api/customer/${customer}`)
             .then((res) => {
-                console.log('React Single Customer')
-                console.log(res.data)
                 this.setState({ updatedCustomer: res.data })
             })
     }
@@ -88,6 +85,8 @@ export default class SingleCustomer extends Component {
                         value="update"
                     />
                 </form>
+                <p>_______________</p>
+                <Link to='/customer'>All Clients</Link>
             </div>
         )
     }
