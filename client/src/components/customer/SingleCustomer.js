@@ -55,7 +55,36 @@ export default class SingleCustomer extends Component {
     render() {
         return (
             <div>
-
+                <h1>{selectedCustomer.firstName} {selectedCustomer.lastName}</h1>
+                <h3>{selectedCustomer.styleProfile}</h3>
+                <h3>Holding Current Items:</h3>
+                <form onSubmit={this.onUpdateCustomer}>
+                    <input
+                        type='text'
+                        name="newCustomerFirstName"
+                        required="required"
+                        onChange={this.onNewCustomerFirstNameChange}
+                        value={this.state.updatedCustomer.firstName}
+                    />
+                    <input
+                        type='text'
+                        name="newCustomerLastName"
+                        required="required"
+                        onChange={this.onNewCustomerLastNameChange}
+                        value={this.state.updatedCustomer.lastName}
+                    />
+                    <input
+                        type='text'
+                        name="newCustomerStyleProfile"
+                        required="required"
+                        onChange={this.onNewCustomerStyleProfileChange}
+                        value={this.state.updatedCustomer.styleProfile}
+                    />
+                    <input
+                        type='submit'
+                        value="update"
+                    />
+                </form>
             </div>
         )
     }
