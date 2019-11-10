@@ -23,7 +23,7 @@ export default class AllCustomers extends Component {
         return (
             <div>
             <h1>Clients</h1>
-            <Link>Add New Client</Link>
+            <Link to="/customer/create-customer">Add New Client</Link>
             <p>_______________</p>
                 {this.state.customerList.map((client) => {
                     const singleCustomerLink = `/customer/${client._id}`

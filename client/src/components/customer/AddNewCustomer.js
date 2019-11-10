@@ -15,7 +15,7 @@ export default class AddNewCustomer extends Component {
             lastName: this.state.newCustomerLastName,
             styleProfile: this.state.newCustomerStyleProfile
         }
-        axios.post('/customer', newCustomer)
+        axios.post('/api/customer', newCustomer)
     }
 
     onNewCustomerFirstNameChange = (event) => {
