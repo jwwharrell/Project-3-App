@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 export default class AllCustomers extends Component {
 
     state = {
-        customerList: []
+        customerList: [],
     }
 
     componentDidMount() {
@@ -23,11 +23,17 @@ export default class AllCustomers extends Component {
         return (
             <div>
             <h1>Clients</h1>
+            <Link>Add New Client</Link>
+            <p>_______________</p>
                 {this.state.customerList.map((client) => {
                     return (
                         <div>
-                            
-                            <p>{client.firstName} {client.lastName}</p>
+                            <Link>
+                            <h3>{client.firstName} {client.lastName}</h3>
+                            </Link>
+                            <button>Delete Client</button>
+                            <br/>
+                            <p>_______________</p>
                         </div>
                     )
                 })}
