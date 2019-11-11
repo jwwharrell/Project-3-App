@@ -7,7 +7,8 @@ export default class SingleInventoryItem extends Component {
             name: '',
             product: '',
             size: '',
-            color: ''
+            color: '',
+            customerId: ''
         }
 
     }
