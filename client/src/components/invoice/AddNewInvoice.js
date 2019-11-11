@@ -6,14 +6,21 @@ export default class AddNewInvoice extends Component {
     state = {
         newInvoiceAmount: '',
         newInvoiceDateOfService: '',
-        newInvoiceNotes: ''
+        newInvoiceNotes: '',
+        newInvoiceCustomerId: this.props.match.params.customerId
+    }
+
+    componentDidMount() {
+        console.log('We Here!')
+        console.log(this.props.match.params.customerId)
     }
 
     creatNewInvoice = () => {
         const newInvoice = {
             amount: this.state.newInvoiceAmount,
             dateOfService: this.state.newInvoiceDateOfService,
-            notes: this.state.newInvoiceNotes
+            notes: this.state.newInvoiceNotes,
+            customerId: this.state.newInvoiceCustomerId
         }
         axios.post('/api/invoice', newInvoice)
     }

@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/inventory/new-piece" component={AddNewInventoryItem}/>
           <Route exact path="/inventory/:inventoryId" component={SingleInventoryItem}/>
           <Route exact path="/all-invoices" component={EveryInvoice}/>
-          <Route exact path="/all-invoices/create-invoice" component={AddNewInvoice}/>
+          <Route exact path="/all-invoices/create-invoice/:customerId" component={AddNewInvoice}/>
           <Route exact path="/all-invoices/:invoiceId" component={SingleInvoice}/>
         </Switch>
       </Router>
