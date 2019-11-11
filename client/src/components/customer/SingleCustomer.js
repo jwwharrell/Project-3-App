@@ -85,6 +85,12 @@ export default class SingleCustomer extends Component {
                         value="update"
                     />
                 </form>
+                <br />
+                <Link 
+                to='/all-invoices/create-invoice'
+                >
+                Add Invoice
+                </Link>
                 <p>_______________</p>
                 <Link to='/customer'>All Clients</Link>
             </div>

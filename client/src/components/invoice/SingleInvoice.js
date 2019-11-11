@@ -7,7 +7,8 @@ export default class SingleInvoice extends Component {
         updatedInvoice: {
             amount: '',
             dateOfService: '',
-            notes: ''
+            notes: '',
+            customerId: ''
         }
 
     }
