@@ -8,6 +8,8 @@ import EntireInventory from './components/inventory/EntireInventory.js'
 import AddNewInventoryItem from './components/inventory/AddNewInventoryItem.js'
 import SingleInventoryItem from './components/inventory/SingleInventoryItem'
 import EveryInvoice from './components/invoice/EveryInvoice.js'
+import AddNewInvoice from './components/invoice/AddNewInvoice.js'
+import SingleInvoice from './components/invoice/SingleInvoice.js'
 import './App.css';
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Route exact path="/inventory/new-piece" component={AddNewInventoryItem}/>
           <Route exact path="/inventory/:inventoryId" component={SingleInventoryItem}/>
           <Route exact path="/all-invoices" component={EveryInvoice}/>
+          <Route exact path="/all-invoices/create-invoice" component={AddNewInvoice}/>
+          <Route exact path="/all-invoices/:invoiceId" component={SingleInvoice}/>
         </Switch>
       </Router>
     </div>
