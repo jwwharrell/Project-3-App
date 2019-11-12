@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
 
 export default class AllCustomers extends Component {
 
@@ -42,9 +43,11 @@ export default class AllCustomers extends Component {
                             <Link to={singleCustomerLink}>
                                 <h3>{client.firstName} {client.lastName}</h3>
                             </Link>
-                            <button
+                            <Button
+                            variant="contained" 
+                            color="primary"
                             onClick={() => this.onCustomerDeleteClick(customerId)}
-                            >Delete Client</button>
+                            >Delete Client</Button>
                             <br />
                             <p>_______________</p>
                             <Link to="/">Dashboard</Link>
