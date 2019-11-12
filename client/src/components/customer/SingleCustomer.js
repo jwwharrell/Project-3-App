@@ -32,7 +32,7 @@ export default class SingleCustomer extends Component {
     onUpdateCustomer = (event) => {
         event.preventDefault()
         const uCustomer = this.state.updatedCustomer._id
-        axios.put(`/customer/${uCustomer}`, this.state.updatedCustomer)
+        axios.put(`/api/customer/${uCustomer}`, this.state.updatedCustomer)
     }
 
     onNewCustomerFirstNameChange = (event) => {
