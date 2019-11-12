@@ -8,6 +8,7 @@ export default class SingleInvoice extends Component {
             amount: '',
             dateOfService: '',
             notes: '',
+            paymentConfirmed: '',
             customerId: ''
         }
 
@@ -83,6 +84,12 @@ export default class SingleInvoice extends Component {
                         onChange={this.onNewInvoiceNoteChange}
                         value={this.state.updatedInvoice.notes}
                     />
+                    <input
+                        type='checkbox'
+                        name="newPaymentConfirmed"
+                        value={this.state.updatedInvoice.paymentConfirmed}
+                    />Client Paid<br/>
+
                     <input
                         type='submit'
                         value="update"

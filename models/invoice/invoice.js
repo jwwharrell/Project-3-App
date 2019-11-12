@@ -4,6 +4,7 @@ const InvoiceSchema = new mongoose.Schema({
     amount: Number,
     dateOfService: Date,
     notes: String,
+    paymentConfirmed: Boolean,
     customerId: mongoose.Types.ObjectId
 })
 
