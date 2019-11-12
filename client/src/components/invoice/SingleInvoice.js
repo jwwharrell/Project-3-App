@@ -10,21 +10,25 @@ export default class SingleInvoice extends Component {
             notes: '',
             paymentConfirmed: '',
             customerId: ''
-        }
-
+        },
+        customerInfo: '',
     }
 
     componentDidMount() {
         this.refreshInvoice()
+      
     }
 
     refreshInvoice = () => {
         const invoice = this.props.match.params.invoiceId
         axios.get(`/api/invoice/${invoice}`)
             .then((res) => {
-                console.log(res.data)
                 this.setState({ updatedInvoice: res.data })
-            })
+                axios.get(`/api/customer/${this.state.updatedInvoice.customerId}`)
+                    .then((res) => {
+                        this.setState({ customerInfo: res.data.singleCustomer })
+                    })
+            })           
     }
 
     onUpdateInvoice = (event) => {
@@ -54,14 +58,26 @@ export default class SingleInvoice extends Component {
         this.setState(previousState)
     }
 
+    onNewPaymentConfirmedChange = (event) => {
+        console.log(event.target.value)
+        const newPaymentConfirmed = event.target.value
+        const previousState = { ...this.state }
+        previousState.updatedInvoice.paymentConfirmed = newPaymentConfirmed
+        this.setState(previousState)
+    }
+
     render() {
         const selectedInvoice = this.state.updatedInvoice
+        const customerInfo = this.state.customerInfo
+        
+        
         return (
             <div>
-                <h1>{selectedInvoice.dateOfService}</h1>
-                <h3>${selectedInvoice.amount}</h3>
-                <h3>Notes:</h3>
-                <h4>{selectedInvoice.notes}</h4>
+                <h1>{customerInfo.firstName} {customerInfo.lastName}</h1> 
+                <h2>{selectedInvoice.notes}</h2>
+                <h3>${selectedInvoice.amount}</h3>                
+                <h3>Date:</h3>
+                <h4>{selectedInvoice.dateOfService}</h4>
                 <form onSubmit={this.onUpdateInvoice}>
                     <input
                         type='number'
@@ -83,13 +99,19 @@ export default class SingleInvoice extends Component {
                         required="required"
                         onChange={this.onNewInvoiceNoteChange}
                         value={this.state.updatedInvoice.notes}
-                    />
+                    /><span> Client Paid: </span>
                     <input
-                        type='checkbox'
+                        type='radio'
                         name="newPaymentConfirmed"
-                        value={this.state.updatedInvoice.paymentConfirmed}
-                    />Client Paid<br/>
-
+                        onChange={this.onNewPaymentConfirmedChange}
+                        value={true}
+                    /><span> Yes </span>
+                    <input
+                        type='radio'
+                        name="newPaymentConfirmed"
+                        onChange={this.onNewPaymentConfirmedChange}
+                        value={false}
+                    /> No <br/>
                     <input
                         type='submit'
                         value="update"
