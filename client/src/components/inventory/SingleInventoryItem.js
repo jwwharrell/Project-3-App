@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 export default class SingleInventoryItem extends Component {
     state = {
@@ -27,11 +28,7 @@ export default class SingleInventoryItem extends Component {
             .then((res) => {
                 this.setState({ updatedItem: res.data })
             })
-        const customerId = this.state.updatedItem.customerId
-        axios.get(`/api/customer/${customerId}`)
-            .then((res) => {
-                this.setState({ holderOfPiece: res.data })
-            })
+        
     }
 
     getAllCostumersForDropDown = () => {
@@ -80,12 +77,18 @@ export default class SingleInventoryItem extends Component {
         const previousState = {...this.state}
         previousState.updatedItem.customerId = newCustomerHold
         this.setState(previousState)
+        const customerId = this.state.updatedItem.customerId
+        axios.get(`/api/customer/${customerId}`)
+            .then((res) => {
+                console.log(`This is the response ${res.data.singleCustomer}`)
+                this.setState({ holderOfPiece: res.data.singleCustomer })
+                console.log(this.state.holderOfPiece)
+            })
     }
 
     render() {
         const selectedItem = this.state.updatedItem
         const customer = this.state.holderOfPiece
-        console.log(customer)
         return (
             <div>
                 <h1>{selectedItem.name}</h1>
@@ -140,7 +143,8 @@ export default class SingleInventoryItem extends Component {
                         value="update"
                     />
                 </form>
-                
+                <br />
+               <Link to='/inventory'>Inventory</Link> 
             </div>
         )
     }
