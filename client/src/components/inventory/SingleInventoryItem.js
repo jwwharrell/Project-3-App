@@ -75,15 +75,18 @@ export default class SingleInventoryItem extends Component {
     onNewCustomerHoldChange = (event) => {
         const newCustomerHold = event.target.value
         const previousState = {...this.state}
+        if(newCustomerHold === '--Assign To Client--'){
+            previousState.holderOfPiece= ''
+            this.setState(previousState)
+        } else {
         previousState.updatedItem.customerId = newCustomerHold
         this.setState(previousState)
         const customerId = this.state.updatedItem.customerId
         axios.get(`/api/customer/${customerId}`)
             .then((res) => {
-                console.log(`This is the response ${res.data.singleCustomer}`)
                 this.setState({ holderOfPiece: res.data.singleCustomer })
-                console.log(this.state.holderOfPiece)
             })
+        }
     }
 
     render() {
@@ -128,7 +131,9 @@ export default class SingleInventoryItem extends Component {
                     <select
                     onChange={this.onNewCustomerHoldChange}
                     >
-                    <option>--Assign To Client--</option>
+                    <option
+                    >--Assign To Client--</option>
+                    
                     {this.state.allCostumers.map((customer) => {
                         return (
                             <option
