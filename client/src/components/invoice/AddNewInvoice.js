@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
+
 export default class AddNewInvoice extends Component {
     state = {
         newInvoiceAmount: '',
@@ -44,6 +45,7 @@ export default class AddNewInvoice extends Component {
         return (
             <div>
                 <form>
+                
                     <input
                         type='number'
                         placeholder='Invoice Amount'
@@ -52,7 +54,8 @@ export default class AddNewInvoice extends Component {
                         onChange={this.onNewInvoiceAmount}
                         value={this.state.newInvoiceAmount}
                     />
-                    <input type='date'
+                    <input 
+                        type='date'
                         placeholder='Invoice Date'
                         name="newInvoiceDateOfService"
                         required="required"

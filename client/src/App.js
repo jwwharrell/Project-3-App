@@ -17,16 +17,16 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" component={Dashboard}/>
-          <Route exact path="/customer" component={AllCustomers}/>
-          <Route exact path="/customer/create-customer" component={AddNewCustomer}/>
-          <Route exact path="/customer/:customerId" component={SingleCustomer}/>
-          <Route exact path="/inventory" component={EntireInventory}/>
-          <Route exact path="/inventory/new-piece" component={AddNewInventoryItem}/>
-          <Route exact path="/inventory/:inventoryId" component={SingleInventoryItem}/>
-          <Route exact path="/all-invoices" component={EveryInvoice}/>
-          <Route exact path="/all-invoices/create-invoice/:customerId" component={AddNewInvoice}/>
-          <Route exact path="/all-invoices/:invoiceId" component={SingleInvoice}/>
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/customer" component={AllCustomers} />
+          <Route exact path="/customer/create-customer" component={AddNewCustomer} />
+          <Route exact path="/customer/:customerId" component={SingleCustomer} />
+          <Route exact path="/inventory" component={EntireInventory} />
+          <Route exact path="/inventory/new-piece" component={AddNewInventoryItem} />
+          <Route exact path="/inventory/:inventoryId" component={SingleInventoryItem} />
+          <Route exact path="/all-invoices" component={EveryInvoice} />
+          <Route exact path="/all-invoices/create-invoice/:customerId" component={AddNewInvoice} />
+          <Route exact path="/all-invoices/:invoiceId" component={SingleInvoice} />
         </Switch>
       </Router>
     </div>
