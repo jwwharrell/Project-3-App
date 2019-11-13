@@ -5,8 +5,12 @@
 <p>In our third project, we (SEI24) were asked to make a MERN-stack application. I decided to make a CRM for wardrobe stylists. Inspired by my brother-in-law's work, I wanted to find a way to distill his operation into one space. The app allows for CRUD of all internal APIs, which allows the user to manage a client list, invoices, and an inventory.</p>
 <br>
 
-<h2>Heroku Link</h2>
-<a href='https://fashion-forward-app.herokuapp.com/'>fashion forward</a>
+
+<a href='https://fashion-forward-app.herokuapp.com/'><h2>Heroku Link</h2></a>
+<br>
+
+
+<a href="https://git.generalassemb.ly/jwharrell/Project-3-App/projects/1"><h2>Project Board</h2></a>
 <br>
 
 <h2>ERD</h2>
