@@ -50,7 +50,6 @@ export default class AllCustomers extends Component {
                             >Delete Client</Button>
                             <br />
                             <p>_______________</p>
-                            <Link to="/">Dashboard</Link>
                         </div>
                     )
                 })}

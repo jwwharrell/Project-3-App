@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+
 
 export default class EntireInventory extends Component {
     state = {
@@ -31,6 +33,8 @@ export default class EntireInventory extends Component {
                 <h1>
                     Inventory
                 </h1>
+                <Link to="/inventory/new-piece">Add New Piece To Inventory</Link>
+                <p>_______________</p>
                 {this.state.inventoryList.map((piece) => {
                     const pieceLinkId = `/inventory/${piece._id}`
                     const pieceId = piece._id
@@ -44,18 +48,18 @@ export default class EntireInventory extends Component {
                                     {piece.name}
                                 </h3>
                             </Link>
-                            <button
+                            <Button
+                                variant="contained"
+                                color="primary"
                                 onClick={() => this.onPieceDeleteClick(pieceId)}
-                            >Delete Item</button>
+                            >Delete Item</Button>
                             <br />
                             <p>_______________</p>
                         </div>
                     )
                 })}
-                <Link to="/inventory/new-piece">Add New Piece To Inventory</Link>
                 <br />
                 <br />
-                <Link to="/">Dashboard</Link>
             </div>
         )
     }

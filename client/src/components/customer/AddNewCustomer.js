@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
+
 export default class AddNewCustomer extends Component {
     state = {
         newCustomerFirstName: '',
@@ -64,7 +65,9 @@ export default class AddNewCustomer extends Component {
                         onClick={() => this.creatNewCustomer()}
                     />
                 </form>
-                <Link to='/customer'>All Clients</Link>
+                <br/>
+                <br/>
+                <Link to='/'>Home</Link>
             </div>
         )
     }

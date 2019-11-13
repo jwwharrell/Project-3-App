@@ -78,7 +78,9 @@ export default class AddNewInventoryItem extends Component {
                         onClick={() => this.creatNewPiece()}
                     />
                 </form>
-                <Link to='/inventory'>Inventory</Link>
+                <br/>
+                <br/>
+                <Link to='/'>Home</Link>
             </div>
         )
     }

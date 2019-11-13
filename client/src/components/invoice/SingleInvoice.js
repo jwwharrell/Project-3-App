@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 export default class SingleInvoice extends Component {
     state = {
@@ -117,6 +118,8 @@ export default class SingleInvoice extends Component {
                         value="update"
                     />
                 </form>
+                <br />
+                <Link to='/'>Home</Link>
             </div>
         )
     }

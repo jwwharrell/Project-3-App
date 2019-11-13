@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+
 
 export default class EveryInvoice extends Component {
     state = {
@@ -35,22 +37,21 @@ export default class EveryInvoice extends Component {
                     return (
                         <div
                             key={invoice._id}>
-                            <span>
                                 <Link
                                     to={linkId}
                                 >
-                                    {invoice.dateOfService}
+                                    <h3>{invoice.dateOfService}</h3>
                                 </Link>
-                                <button
+                                <Button
+                                    variant="contained"
+                                    color="primary"
                                     onClick={() => this.onInvoiceDeleteClick(invoiceId)}
-                                >x</button>
-                            </span>
+                                >Delete Invoice</Button>
                             <br />
-                            <br />
+                            <p>_______________</p>
                         </div>
                     )
                 })}
-                <Link to="/">Dashboard</Link>
             </div>
         )
     }

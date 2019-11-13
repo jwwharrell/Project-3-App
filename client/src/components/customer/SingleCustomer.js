@@ -124,7 +124,7 @@ export default class SingleCustomer extends Component {
                     Add Invoice
                 </Link>
                 <p>_______________</p>
-                <Link to='/customer'>All Clients</Link>
+                <Link to='/'>Home</Link>
             </div>
         )
     }

@@ -74,7 +74,9 @@ export default class AddNewInvoice extends Component {
                         onClick={() => this.creatNewInvoice()}
                     />
                 </form>
-                <Link to='/all-invoices'>All Invoices</Link>
+                <br/>
+                <br/>
+                <Link to='/'>Home</Link>
             </div>
         )
     }
