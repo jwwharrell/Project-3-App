@@ -10,11 +10,11 @@
 <br>
 
 <h2>ERD</h2>
-<img src=# alt="Picture of project ERD"/>
+<img src="./images/ERD.jpg" alt="Picture of project ERD"/>
 <br>
 
 <h2>Wireframe</h2>
-<img src=# alt="Picture of project wireframe"/>
+<img src="./images/WireFrame.jpg" alt="Picture of project wireframe"/>
 <br>
 
 <h2>Technologies Used</h2>
