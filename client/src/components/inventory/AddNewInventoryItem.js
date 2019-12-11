@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class AddNewInventoryItem extends Component {
     state = {
@@ -42,7 +42,8 @@ export default class AddNewInventoryItem extends Component {
 
     render() {
         return (
-            <div>
+            <div className="form-container">
+                <h2>Add New Clothing Item</h2>
                 <form>
                     <input
                         type='text'
@@ -78,8 +79,8 @@ export default class AddNewInventoryItem extends Component {
                         onClick={() => this.creatNewPiece()}
                     />
                 </form>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <Link to='/'>Home</Link>
             </div>
         )

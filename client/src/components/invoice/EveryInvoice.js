@@ -40,7 +40,7 @@ export default class EveryInvoice extends Component {
                                 <Link
                                     to={linkId}
                                 >
-                                    <h3>{invoice.dateOfService}</h3>
+                                    <h3>{invoice.notes}</h3>
                                 </Link>
                                 <Button
                                     variant="contained"

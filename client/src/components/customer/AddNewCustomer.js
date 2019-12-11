@@ -36,7 +36,8 @@ export default class AddNewCustomer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="form-container">
+                <h2>Add New Customer</h2>
                 <form>
                     <input
                         type='text'
