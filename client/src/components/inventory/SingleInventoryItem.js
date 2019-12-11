@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class SingleInventoryItem extends Component {
     state = {
@@ -28,7 +28,7 @@ export default class SingleInventoryItem extends Component {
             .then((res) => {
                 this.setState({ updatedItem: res.data })
             })
-        
+
     }
 
     getAllCostumersForDropDown = () => {
@@ -74,18 +74,18 @@ export default class SingleInventoryItem extends Component {
 
     onNewCustomerHoldChange = (event) => {
         const newCustomerHold = event.target.value
-        const previousState = {...this.state}
-        if(newCustomerHold === '--Assign To Client--'){
-            previousState.holderOfPiece= ''
+        const previousState = { ...this.state }
+        if (newCustomerHold === '--Assign To Client--') {
+            previousState.holderOfPiece = ''
             this.setState(previousState)
         } else {
-        previousState.updatedItem.customerId = newCustomerHold
-        this.setState(previousState)
-        const customerId = this.state.updatedItem.customerId
-        axios.get(`/api/customer/${customerId}`)
-            .then((res) => {
-                this.setState({ holderOfPiece: res.data.singleCustomer })
-            })
+            previousState.updatedItem.customerId = newCustomerHold
+            this.setState(previousState)
+            const customerId = this.state.updatedItem.customerId
+            axios.get(`/api/customer/${customerId}`)
+                .then((res) => {
+                    this.setState({ holderOfPiece: res.data.singleCustomer })
+                })
         }
     }
 
@@ -99,57 +99,59 @@ export default class SingleInventoryItem extends Component {
                 <h3>Size: {selectedItem.size}</h3>
                 <h3>Color: {selectedItem.color}</h3>
                 <h3>Current Holder of Piece: {customer.firstName} {customer.lastName}</h3>
-                <form onSubmit={this.onUpdateItem}>
-                    <input
-                        type='text'
-                        name="newItemName"
-                        required="required"
-                        onChange={this.onNewItemNameChange}
-                        value={this.state.updatedItem.name}
-                    />
-                    <input
-                        type='text'
-                        name="newItemProduct"
-                        required="required"
-                        onChange={this.onNewItemProductChange}
-                        value={this.state.updatedItem.product}
-                    />
-                    <input
-                        type='text'
-                        name="newItemSize"
-                        required="required"
-                        onChange={this.onNewItemSizeChange}
-                        value={this.state.updatedItem.size}
-                    />
-                    <input
-                        type='text'
-                        name="newItemColor"
-                        required="required"
-                        onChange={this.onNewItemColorChange}
-                        value={this.state.updatedItem.color}
-                    />
-                    <select
-                    onChange={this.onNewCustomerHoldChange}
-                    >
-                    <option
-                    >--Assign To Client--</option>
-                    
-                    {this.state.allCostumers.map((customer) => {
-                        return (
+                <div className="form-container">
+                    <form onSubmit={this.onUpdateItem}>
+                        <input
+                            type='text'
+                            name="newItemName"
+                            required="required"
+                            onChange={this.onNewItemNameChange}
+                            value={this.state.updatedItem.name}
+                        />
+                        <input
+                            type='text'
+                            name="newItemProduct"
+                            required="required"
+                            onChange={this.onNewItemProductChange}
+                            value={this.state.updatedItem.product}
+                        />
+                        <input
+                            type='text'
+                            name="newItemSize"
+                            required="required"
+                            onChange={this.onNewItemSizeChange}
+                            value={this.state.updatedItem.size}
+                        />
+                        <input
+                            type='text'
+                            name="newItemColor"
+                            required="required"
+                            onChange={this.onNewItemColorChange}
+                            value={this.state.updatedItem.color}
+                        />
+                        <select
+                            onChange={this.onNewCustomerHoldChange}
+                        >
                             <option
-                                key={customer._id}
-                                value={customer._id}
-                            >{customer.firstName} {customer.lastName}</option>
-                        )
-                    })}
-                </select>
-                    <input
-                        type='submit'
-                        value="update"
-                    />
-                </form>
+                            >--Assign To Client--</option>
+
+                            {this.state.allCostumers.map((customer) => {
+                                return (
+                                    <option
+                                        key={customer._id}
+                                        value={customer._id}
+                                    >{customer.firstName} {customer.lastName}</option>
+                                )
+                            })}
+                        </select>
+                        <input
+                            type='submit'
+                            value="update"
+                        />
+                    </form>
+                </div>
                 <br />
-               <Link to='/'>Home</Link> 
+                <Link to='/'>Home</Link>
             </div>
         )
     }

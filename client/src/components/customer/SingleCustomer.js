@@ -70,37 +70,39 @@ export default class SingleCustomer extends Component {
                         <div>
                             <Link to={singleItemLink}>{item.name}</Link>
                             <p>_______________</p>
-                            
+
                         </div>
                     )
                 })}
-                <form onSubmit={this.onUpdateCustomer}>
-                    <input
-                        type='text'
-                        name="newCustomerFirstName"
-                        required="required"
-                        onChange={this.onNewCustomerFirstNameChange}
-                        value={this.state.updatedCustomer.firstName}
-                    />
-                    <input
-                        type='text'
-                        name="newCustomerLastName"
-                        required="required"
-                        onChange={this.onNewCustomerLastNameChange}
-                        value={this.state.updatedCustomer.lastName}
-                    />
-                    <input
-                        type='text'
-                        name="newCustomerStyleProfile"
-                        required="required"
-                        onChange={this.onNewCustomerStyleProfileChange}
-                        value={this.state.updatedCustomer.styleProfile}
-                    />
-                    <input
-                        type='submit'
-                        value="update"
-                    />
-                </form>
+                <div className="form-container">
+                    <form onSubmit={this.onUpdateCustomer}>
+                        <input
+                            type='text'
+                            name="newCustomerFirstName"
+                            required="required"
+                            onChange={this.onNewCustomerFirstNameChange}
+                            value={this.state.updatedCustomer.firstName}
+                        />
+                        <input
+                            type='text'
+                            name="newCustomerLastName"
+                            required="required"
+                            onChange={this.onNewCustomerLastNameChange}
+                            value={this.state.updatedCustomer.lastName}
+                        />
+                        <input
+                            type='text'
+                            name="newCustomerStyleProfile"
+                            required="required"
+                            onChange={this.onNewCustomerStyleProfileChange}
+                            value={this.state.updatedCustomer.styleProfile}
+                        />
+                        <input
+                            type='submit'
+                            value="update"
+                        />
+                    </form>
+                </div>
                 <br />
                 {this.state.invoiceList.map((invoice) => {
                     const singleInvoiceLink = `/all-invoices/${invoice._id}`

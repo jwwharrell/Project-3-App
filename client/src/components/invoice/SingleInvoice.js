@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class SingleInvoice extends Component {
     state = {
@@ -17,7 +17,7 @@ export default class SingleInvoice extends Component {
 
     componentDidMount() {
         this.refreshInvoice()
-      
+
     }
 
     refreshInvoice = () => {
@@ -29,7 +29,7 @@ export default class SingleInvoice extends Component {
                     .then((res) => {
                         this.setState({ customerInfo: res.data.singleCustomer })
                     })
-            })           
+            })
     }
 
     onUpdateInvoice = (event) => {
@@ -70,54 +70,61 @@ export default class SingleInvoice extends Component {
     render() {
         const selectedInvoice = this.state.updatedInvoice
         const customerInfo = this.state.customerInfo
-        
-        
+
+
         return (
             <div>
-                <h1>{customerInfo.firstName} {customerInfo.lastName}</h1> 
+                <h1>{customerInfo.firstName} {customerInfo.lastName}</h1>
                 <h2>{selectedInvoice.notes}</h2>
-                <h3>${selectedInvoice.amount}</h3>                
+                <h3>${selectedInvoice.amount}</h3>
                 <h3>Date:</h3>
                 <h4>{selectedInvoice.dateOfService}</h4>
-                <form onSubmit={this.onUpdateInvoice}>
-                    <input
-                        type='number'
-                        name="newInvoiceAmount"
-                        required="required"
-                        onChange={this.onNewInvoiceAmountChange}
-                        value={this.state.updatedInvoice.amount}
-                    />
-                    <input
-                        type='date'
-                        name="newInvoiceDate"
-                        required="required"
-                        onChange={this.onNewInvoiceDateChange}
-                        value={this.state.updatedInvoice.dateOfService}
-                    />
-                    <input
-                        type='text'
-                        name="newInvoiceNote"
-                        required="required"
-                        onChange={this.onNewInvoiceNoteChange}
-                        value={this.state.updatedInvoice.notes}
-                    /><span> Client Paid: </span>
-                    <input
-                        type='radio'
-                        name="newPaymentConfirmed"
-                        onChange={this.onNewPaymentConfirmedChange}
-                        value={true}
-                    /><span> Yes </span>
-                    <input
-                        type='radio'
-                        name="newPaymentConfirmed"
-                        onChange={this.onNewPaymentConfirmedChange}
-                        value={false}
-                    /> No <br/>
-                    <input
-                        type='submit'
-                        value="update"
-                    />
-                </form>
+                <div className="form-container">
+                    <form onSubmit={this.onUpdateInvoice}>
+                        <input
+                            type='number'
+                            name="newInvoiceAmount"
+                            required="required"
+                            onChange={this.onNewInvoiceAmountChange}
+                            value={this.state.updatedInvoice.amount}
+                        />
+                        <input
+                            type='date'
+                            name="newInvoiceDate"
+                            required="required"
+                            onChange={this.onNewInvoiceDateChange}
+                            value={this.state.updatedInvoice.dateOfService}
+                        />
+                        <input
+                            type='text'
+                            name="newInvoiceNote"
+                            required="required"
+                            onChange={this.onNewInvoiceNoteChange}
+                            value={this.state.updatedInvoice.notes}
+                        /><span> Client Paid: </span>
+                        <span>
+                            <input
+                                type='radio'
+                                name="newPaymentConfirmed"
+                                onChange={this.onNewPaymentConfirmedChange}
+                                value={true}
+                            /> Yes
+                        </span>
+                        <span>
+                            <input
+                                type='radio'
+                                name="newPaymentConfirmed"
+                                onChange={this.onNewPaymentConfirmedChange}
+                                value={false}
+                            /> No
+                        </span>
+                        <br />
+                        <input
+                            type='submit'
+                            value="update"
+                        />
+                    </form>
+                </div>
                 <br />
                 <Link to='/'>Home</Link>
             </div>
