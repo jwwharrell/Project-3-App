@@ -14,9 +14,6 @@ export default class InventoryCard extends Component {
 
     componentDidMount() {
         this.refreshInvoice()
-        console.log('component mounted')
-        console.log(this.props)
-
     }
 
     refreshInvoice = () => {
