@@ -1,5 +1,5 @@
-.App {
-  text-align: center;
+body {
+  background-color: #f1f1f1 !important;
 }
 
 h1 {
@@ -80,6 +80,25 @@ input[type=submit]:hover {
 } 
 
 .form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  min-width: 275px;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 14px;
+}
+
+.pos {
+  margin-bottom: 12px;
+}
+
+.allCards {
   display: flex;
   flex-direction: column;
   align-items: center;

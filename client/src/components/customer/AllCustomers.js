@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Button from '@material-ui/core/Button';
+import CustomerCard from '../cards/CustomerCard.js'
 
 export default class AllCustomers extends Component {
 
@@ -29,27 +29,25 @@ export default class AllCustomers extends Component {
 
 
     render() {
-        
+
         return (
-            <div>
-                <h1>Clients</h1>
+            <div className='allCards'>
+                <br />
                 <Link to="/customer/create-customer">Add New Client</Link>
-                <p>_______________</p>
+                <br />
                 {this.state.customerList.map((client) => {
                     const singleCustomerLink = `/customer/${client._id}`
                     const customerId = client._id
                     return (
                         <div key={client._id}>
-                            <Link to={singleCustomerLink}>
-                                <h3>{client.firstName} {client.lastName}</h3>
-                            </Link>
-                            <Button
-                            variant="contained" 
-                            color="primary"
-                            onClick={() => this.onCustomerDeleteClick(customerId)}
-                            >Delete Client</Button>
+                            <CustomerCard
+                                cfn={client.firstName}
+                                cln={client.lastName}
+                                customerLink={singleCustomerLink}
+                                stylePro={client.styleProfile}
+                                deleteCustomer={() => this.onCustomerDeleteClick(customerId)}
+                            />
                             <br />
-                            <p>_______________</p>
                         </div>
                     )
                 })}
