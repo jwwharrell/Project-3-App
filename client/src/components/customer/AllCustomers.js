@@ -32,10 +32,10 @@ export default class AllCustomers extends Component {
     render() {
 
         return (
-            <div>
-                <h1>Clients</h1>
+            <div className='allCustomers'>
+                <br />
                 <Link to="/customer/create-customer">Add New Client</Link>
-                <p>_______________</p>
+                <br />
                 {this.state.customerList.map((client) => {
                     const singleCustomerLink = `/customer/${client._id}`
                     const customerId = client._id
@@ -46,14 +46,9 @@ export default class AllCustomers extends Component {
                                 cln={client.lastName}
                                 customerLink={singleCustomerLink}
                                 stylePro={client.styleProfile}
+                                deleteCustomer={() => this.onCustomerDeleteClick(customerId)}
                             />
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() => this.onCustomerDeleteClick(customerId)}
-                            >Delete Client</Button>
                             <br />
-                            <p>_______________</p>
                         </div>
                     )
                 })}

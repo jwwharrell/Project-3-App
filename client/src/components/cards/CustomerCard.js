@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -29,7 +28,10 @@ export default class CustomerCard extends Component {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Delete Client</Button>
+                    <Button 
+                        size="small"
+                        onClick={this.props.deleteCustomer}
+                        >Delete Client</Button>
                 </CardActions>
             </Card>
         )
