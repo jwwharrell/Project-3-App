@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+import InvoiceCard from '../cards/InvoiceCard'
 
 
 export default class EveryInvoice extends Component {
@@ -29,26 +30,22 @@ export default class EveryInvoice extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Invoices</h1>
+            <div className='allCards'>
                 {this.state.invoiceList.map((invoice) => {
                     const linkId = `/all-invoices/${invoice._id}`
                     const invoiceId = invoice._id
                     return (
                         <div
                             key={invoice._id}>
-                                <Link
-                                    to={linkId}
-                                >
-                                    <h3>{invoice.notes}</h3>
-                                </Link>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => this.onInvoiceDeleteClick(invoiceId)}
-                                >Delete Invoice</Button>
                             <br />
-                            <p>_______________</p>
+                            <br />
+                            <InvoiceCard
+                                note={invoice.notes}
+                                invoiceLink={linkId}
+                                amount={invoice.amount}
+                                deleteInvoice={() => this.onInvoiceDeleteClick(invoiceId)}
+                            />
+                            <br />
                         </div>
                     )
                 })}

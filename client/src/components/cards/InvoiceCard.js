@@ -12,25 +12,25 @@ export default class InventoryCard extends Component {
             <Card className='card' variant="outlined">
                 <CardContent>
                     <Typography className='title' color="textSecondary" gutterBottom>
-                        Inventory Piece
+                        Invoice
                     </Typography>
                     <Typography variant="h5" component="h2">
-                        <Link to={this.props.itemLink}>
-                            {this.props.name}
+                        <Link to={this.props.invoiceLink}>
+                            {this.props.note}
                         </Link>
                     </Typography>
                     <Typography className='pos' color="textSecondary">
-                        Product:
+                        Amount:
                     </Typography>
                     <Typography variant="body1" component="p">
-                        {this.props.product}
+                        ${this.props.amount}
                     </Typography>
                 </CardContent>
                 <CardActions>
                     <Button 
                         size="small"
-                        onClick={this.props.deleteItem}
-                        >Delete Item</Button>
+                        onClick={this.props.deleteInvoice}
+                        >Delete Invoice</Button>
                 </CardActions>
             </Card> 
         )
