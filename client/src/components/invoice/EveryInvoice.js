@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Button from '@material-ui/core/Button';
 import InvoiceCard from '../cards/InvoiceCard'
 
 
@@ -44,6 +42,7 @@ export default class EveryInvoice extends Component {
                                 invoiceLink={linkId}
                                 amount={invoice.amount}
                                 deleteInvoice={() => this.onInvoiceDeleteClick(invoiceId)}
+                                customerId={invoice.customerId}
                             />
                             <br />
                         </div>

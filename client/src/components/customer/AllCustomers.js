@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Button from '@material-ui/core/Button';
 import CustomerCard from '../cards/CustomerCard.js'
 
 export default class AllCustomers extends Component {
