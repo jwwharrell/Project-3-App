@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+import InventoryCard from '../cards/InventoryCard.js'
 
 
 export default class EntireInventory extends Component {
@@ -29,32 +30,23 @@ export default class EntireInventory extends Component {
 
     render() {
         return (
-            <div>
-                <h1>
-                    Inventory
-                </h1>
+            <div className='allCards'>
+                <br />
                 <Link to="/inventory/new-piece">Add New Piece To Inventory</Link>
-                <p>_______________</p>
+                <br />
                 {this.state.inventoryList.map((piece) => {
                     const pieceLinkId = `/inventory/${piece._id}`
                     const pieceId = piece._id
                     return (
                         <div
                             key={piece._id}>
-                            <Link
-                                to={pieceLinkId}
-                            >
-                                <h3>
-                                    {piece.name}
-                                </h3>
-                            </Link>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() => this.onPieceDeleteClick(pieceId)}
-                            >Delete Item</Button>
+                            <InventoryCard
+                                name={piece.name}
+                                product={piece.product}
+                                itemLink={pieceLinkId}
+                                deleteItem={() => this.onPieceDeleteClick(pieceId)}
+                            />
                             <br />
-                            <p>_______________</p>
                         </div>
                     )
                 })}

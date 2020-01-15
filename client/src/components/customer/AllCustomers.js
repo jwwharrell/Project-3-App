@@ -32,7 +32,7 @@ export default class AllCustomers extends Component {
     render() {
 
         return (
-            <div className='allCustomers'>
+            <div className='allCards'>
                 <br />
                 <Link to="/customer/create-customer">Add New Client</Link>
                 <br />
