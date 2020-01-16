@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
 
 export default class SingleCustomer extends Component {
 
@@ -60,20 +64,67 @@ export default class SingleCustomer extends Component {
         const selectedCustomer = this.state.updatedCustomer
         const addInvoiceLink = `/all-invoices/create-invoice/${selectedCustomer._id}`
         return (
-            <div>
+            <div className='singleView'>
                 <h1>{selectedCustomer.firstName} {selectedCustomer.lastName}</h1>
-                <h3>{selectedCustomer.styleProfile}</h3>
-                <h3>Holding Current Items:</h3>
-                {this.state.heldItems.map((item) => {
-                    const singleItemLink = `/inventory/${item._id}`
-                    return (
-                        <div>
-                            <Link to={singleItemLink}>{item.name}</Link>
-                            <p>_______________</p>
-
-                        </div>
-                    )
-                })}
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-around"
+                    alignItems="center"
+                >
+                    <Card className='card' variant='outlined'>
+                        <CardContent>
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Holding Current Items:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {this.state.heldItems.map((item) => {
+                                    const singleItemLink = `/inventory/${item._id}`
+                                    return (
+                                        <div>
+                                            <Link to={singleItemLink}>{item.name}</Link>
+                                        </div>
+                                    )
+                                })}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                    <Card className='card' variant='outlined'>
+                        <CardContent>
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Style Profile:
+                            </Typography>
+                            <Typography variant="h5" component="h2">
+                                {selectedCustomer.styleProfile}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                    <Card className='card' variant='outlined'>
+                        <CardContent>
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Invoices:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {this.state.invoiceList.map((invoice) => {
+                                    const singleInvoiceLink = `/all-invoices/${invoice._id}`
+                                    return (
+                                        <div>
+                                            <ul>
+                                                <li>
+                                                    <p>__________</p>
+                                                    <Link to={singleInvoiceLink}><h4>${invoice.amount}</h4></Link>
+                                                    <h5>{invoice.dateOfService}</h5>
+                                                    <p>{invoice.notes}</p>
+                                                    <p>__________</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    )
+                                })}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
                 <div className="form-container">
                     <form onSubmit={this.onUpdateCustomer}>
                         <input
@@ -104,22 +155,7 @@ export default class SingleCustomer extends Component {
                     </form>
                 </div>
                 <br />
-                {this.state.invoiceList.map((invoice) => {
-                    const singleInvoiceLink = `/all-invoices/${invoice._id}`
-                    return (
-                        <div>
-                            <ul>
-                                <li>
-                                    <p>__________</p>
-                                    <Link to={singleInvoiceLink}><h4>${invoice.amount}</h4></Link>
-                                    <h5>{invoice.dateOfService}</h5>
-                                    <p>{invoice.notes}</p>
-                                    <p>__________</p>
-                                </li>
-                            </ul>
-                        </div>
-                    )
-                })}
+
                 <Link
                     to={addInvoiceLink}
                 >
