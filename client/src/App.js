@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Dashboard from './components/dashboard/Dashboard.js'
+import Header from './components/materialLayouts/Header.js'
+import Footer from './components/materialLayouts/Footer.js'
 import AddNewCustomer from './components/customer/AddNewCustomer.js'
 import SingleCustomer from './components/customer/SingleCustomer.js'
 import AddNewInventoryItem from './components/inventory/AddNewInventoryItem.js'
@@ -12,9 +13,10 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <Header />
       <Router>
         <Switch>
-          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/" component={Footer} />
           <Route exact path="/customer/create-customer" component={AddNewCustomer} />
           <Route exact path="/customer/:customerId" component={SingleCustomer} />
           <Route exact path="/inventory/new-piece" component={AddNewInventoryItem} />
