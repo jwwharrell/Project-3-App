@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
 
 export default class SingleCustomer extends Component {
 
@@ -70,7 +72,7 @@ export default class SingleCustomer extends Component {
                     container
                     direction="row"
                     justify="space-around"
-                    alignItems="center"
+                    alignItems="flex-start"
                 >
                     <Card className='card' variant='outlined'>
                         <CardContent>
@@ -111,11 +113,11 @@ export default class SingleCustomer extends Component {
                                         <div>
                                             <ul>
                                                 <li>
-                                                    <p>__________</p>
-                                                    <Link to={singleInvoiceLink}><h4>${invoice.amount}</h4></Link>
-                                                    <h5>{invoice.dateOfService}</h5>
-                                                    <p>{invoice.notes}</p>
-                                                    <p>__________</p>
+                                                    <Link to={singleInvoiceLink}>
+                                                        <Typography variant="body1" component="p">
+                                                            {invoice.notes}
+                                                        </Typography>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -123,6 +125,11 @@ export default class SingleCustomer extends Component {
                                 })}
                             </Typography>
                         </CardContent>
+                        <CardActions>
+                            <Link to={addInvoiceLink}>
+                                +
+                            </Link>
+                        </CardActions>
                     </Card>
                 </Grid>
                 <div className="form-container">
@@ -154,14 +161,6 @@ export default class SingleCustomer extends Component {
                         />
                     </form>
                 </div>
-                <br />
-
-                <Link
-                    to={addInvoiceLink}
-                >
-                    Add Invoice
-                </Link>
-                <p>_______________</p>
                 <Link to='/'>Home</Link>
             </div>
         )
