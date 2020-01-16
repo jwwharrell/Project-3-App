@@ -125,8 +125,6 @@ export default class SingleInvoice extends Component {
                         />
                     </form>
                 </div>
-                <br />
-                <Link to='/'>Home</Link>
             </div>
         )
     }

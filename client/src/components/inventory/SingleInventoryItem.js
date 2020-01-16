@@ -150,8 +150,6 @@ export default class SingleInventoryItem extends Component {
                         />
                     </form>
                 </div>
-                <br />
-                <Link to='/'>Home</Link>
             </div>
         )
     }

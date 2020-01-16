@@ -13,8 +13,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Header />
       <Router>
+        <Header />
+
         <Switch>
           <Route exact path="/" component={Footer} />
           <Route exact path="/customer/create-customer" component={AddNewCustomer} />

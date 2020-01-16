@@ -160,7 +160,6 @@ export default class SingleCustomer extends Component {
                         />
                     </form>
                 </div>
-                <Link to='/'>Home</Link>
             </div>
         )
     }
