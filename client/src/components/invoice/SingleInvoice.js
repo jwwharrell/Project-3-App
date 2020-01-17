@@ -75,7 +75,6 @@ export default class SingleInvoice extends Component {
         const selectedInvoice = this.state.updatedInvoice
         const customerInfo = this.state.customerInfo
 
-
         return (
             <div className='singleView'>
                 <h1>{customerInfo.firstName} {customerInfo.lastName}</h1>
