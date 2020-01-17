@@ -89,13 +89,6 @@ export default class SingleInvoice extends Component {
                             value={this.state.updatedInvoice.amount}
                         />
                         <input
-                            type='date'
-                            name="newInvoiceDate"
-                            required="required"
-                            onChange={this.onNewInvoiceDateChange}
-                            value={this.state.updatedInvoice.dateOfService}
-                        />
-                        <input
                             type='text'
                             name="newInvoiceNote"
                             required="required"

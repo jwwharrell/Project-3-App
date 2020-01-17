@@ -14,8 +14,6 @@ export default class InventoryCard extends Component {
 
     componentDidMount() {
         this.refreshInvoice()
-        console.log('component mounted')
-        console.log(this.props)
 
     }
 
@@ -30,8 +28,9 @@ export default class InventoryCard extends Component {
 
 render() {
     const customerInfo = this.state.customerInfo
+    const isPaid = this.props.paid
     return (
-        <Card className='card' variant="outlined">
+        <Card className={isPaid ? 'card-paid' : 'card-not-paid'} variant="outlined">
             <CardContent>
                 <Typography className='title' color="textSecondary" gutterBottom>
                     Invoice
