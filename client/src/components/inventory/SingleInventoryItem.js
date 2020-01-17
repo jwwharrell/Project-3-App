@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
 
 export default class SingleInventoryItem extends Component {
@@ -97,6 +96,8 @@ export default class SingleInventoryItem extends Component {
     render() {
         const selectedItem = this.state.updatedItem
         const customer = this.state.holderOfPiece
+        const singleCustomerLink = `/customer/${customer._id}`
+
         return (
             <div className='singleView'>
                 <h1>{selectedItem.name}</h1>
@@ -136,7 +137,7 @@ export default class SingleInventoryItem extends Component {
                                 Current Holder of Piece:
                             </Typography>
                             <Typography variant="h5" component="h2">
-                                {customer.firstName} {customer.lastName}
+                               <Link to={singleCustomerLink}>{customer.firstName} {customer.lastName}</Link>
                             </Typography>
                         </CardContent>
                     </Card>
