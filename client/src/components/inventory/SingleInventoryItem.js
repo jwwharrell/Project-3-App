@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
+import Typography from '@material-ui/core/Typography'
 
 export default class SingleInventoryItem extends Component {
     state = {
@@ -93,12 +98,49 @@ export default class SingleInventoryItem extends Component {
         const selectedItem = this.state.updatedItem
         const customer = this.state.holderOfPiece
         return (
-            <div>
+            <div className='singleView'>
                 <h1>{selectedItem.name}</h1>
-                <h3>Product: {selectedItem.product}</h3>
-                <h3>Size: {selectedItem.size}</h3>
-                <h3>Color: {selectedItem.color}</h3>
-                <h3>Current Holder of Piece: {customer.firstName} {customer.lastName}</h3>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-around"
+                    alignItems="flex-start"
+                >
+                    <Card className='card' variant='outlined'>
+                        <CardContent>
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Product:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {selectedItem.product}
+                            </Typography>
+                            <br />
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Size:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {selectedItem.size}
+                            </Typography>
+                            <br />
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Color:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {selectedItem.color}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                    <Card className='card' variant='outlined'>
+                        <CardContent>
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Current Holder of Piece:
+                            </Typography>
+                            <Typography variant="h5" component="h2">
+                                {customer.firstName} {customer.lastName}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
                 <div className="form-container">
                     <form onSubmit={this.onUpdateItem}>
                         <input
