@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
 
 export default class SingleInvoice extends Component {
     state = {
@@ -73,12 +77,39 @@ export default class SingleInvoice extends Component {
 
 
         return (
-            <div>
+            <div className='singleView'>
                 <h1>{customerInfo.firstName} {customerInfo.lastName}</h1>
-                <h2>{selectedInvoice.notes}</h2>
-                <h3>${selectedInvoice.amount}</h3>
-                <h3>Date:</h3>
-                <h4>{selectedInvoice.dateOfService}</h4>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-around"
+                    alignItems="flex-start"
+                >
+                    <Card className='card' variant='outlined'>
+                        <CardContent>
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Notes:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {selectedInvoice.notes}
+                            </Typography>
+                            <br />
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Amount:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {selectedInvoice.amount}
+                            </Typography>
+                            <br />
+                            <Typography className='title' color="textSecondary" gutterBottom>
+                                Date of Service:
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                {selectedInvoice.dateOfService}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
                 <div className="form-container">
                     <form onSubmit={this.onUpdateInvoice}>
                         <input
