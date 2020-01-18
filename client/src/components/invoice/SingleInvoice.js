@@ -74,10 +74,11 @@ export default class SingleInvoice extends Component {
     render() {
         const selectedInvoice = this.state.updatedInvoice
         const customerInfo = this.state.customerInfo
+        const customerLink = `/customer/${customerInfo._id}`
 
         return (
             <div className='singleView'>
-                <h1>{customerInfo.firstName} {customerInfo.lastName}</h1>
+                <Link to={customerLink}><h1>{customerInfo.firstName} {customerInfo.lastName}</h1></Link>
                 <Grid
                     container
                     direction="row"
