@@ -90,6 +90,18 @@ input[type=submit]:hover {
   max-width: 400px;
 }
 
+.card-paid {
+  min-width: 275px;
+  max-width: 400px;
+  background-color: rgba(166, 255, 203, 0.459) !important;
+}
+
+.card-not-paid {
+  min-width: 275px;
+  max-width: 400px;
+  background-color: rgba(255, 172, 166, 0.445) !important;
+}
+
 .title {
   font-size: 14px;
 }
@@ -102,4 +114,8 @@ input[type=submit]:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.singleView h1{
+  text-align: center;
 }

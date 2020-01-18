@@ -29,20 +29,22 @@ export default class EveryInvoice extends Component {
     render() {
         return (
             <div className='allCards'>
+                <br />
+                <br />
                 {this.state.invoiceList.map((invoice) => {
                     const linkId = `/all-invoices/${invoice._id}`
                     const invoiceId = invoice._id
                     return (
                         <div
                             key={invoice._id}>
-                            <br />
-                            <br />
+
                             <InvoiceCard
                                 note={invoice.notes}
                                 invoiceLink={linkId}
                                 amount={invoice.amount}
                                 deleteInvoice={() => this.onInvoiceDeleteClick(invoiceId)}
                                 customerId={invoice.customerId}
+                                paid={invoice.paymentConfirmed}
                             />
                             <br />
                         </div>
