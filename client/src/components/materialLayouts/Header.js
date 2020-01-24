@@ -7,8 +7,10 @@ export default class Header extends Component {
         return (
             <AppBar position="static">
                 <Toolbar>
-                    <Link to='/'>
-                        <Typography
+                    <Link to='/' 
+                        className='homeLink'
+                    >
+                        <Typography 
                             variant="h6"
                             color="secondary">
                             fashion forward

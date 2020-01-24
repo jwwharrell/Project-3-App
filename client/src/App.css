@@ -119,3 +119,7 @@ input[type=submit]:hover {
 .singleView h1{
   text-align: center;
 }
+
+.homeLink :hover{
+  color: #f1f1f1;
+}
