@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import CustomerCard from '../cards/CustomerCard.js'
+import TextField from '@material-ui/core/TextField'
 
 export default class AllCustomers extends Component {
 
     state = {
         customerList: [],
+        filteredList: []
     }
 
     componentDidMount() {
@@ -27,11 +29,40 @@ export default class AllCustomers extends Component {
             })
     }
 
+    handleChange = (e) => {
+        let allCustomerData = this.state.customerList
+        let currentList = []
+        let newList = []
+        if (e.target.value !== '') {
+            for (let i = 0; i < allCustomerData.length; i++) {
+                currentList.push(allCustomerData[i].firstName + ' ' + allCustomerData[i].lastName)
+            }
+            newList = currentList.filter((item) => {
+                const lowerCaseIncomingItem = item.toLowerCase();
+                const lowerCaseTextField = e.target.value.toLowerCase();
+                return lowerCaseIncomingItem.includes(lowerCaseTextField)
+            })
+        } else {
+            for (let i = 0; i < allCustomerData.length; i++) {
+                currentList.push(allCustomerData[i].firstName + ' ' + allCustomerData[i].lastName)
+            }
+            newList = currentList
+        }
+        this.setState({filteredList: newList})
+    }
+
 
     render() {
 
         return (
             <div className='allCards'>
+                <form>
+                    <TextField 
+                        id='standard-basic'
+                        label='Search By Client Name'
+                        onChange={this.handleChange}
+                        />
+                </form>
                 <br />
                 <Link to="/customer/create-customer">Add New Client</Link>
                 <br />
