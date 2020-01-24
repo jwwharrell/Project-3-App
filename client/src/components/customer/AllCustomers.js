@@ -18,7 +18,7 @@ export default class AllCustomers extends Component {
     refreshCustomer = () => {
         axios.get('/api/customer')
             .then((res) => {
-                this.setState({ customerList: res.data })
+                this.setState({ customerList: res.data, filteredList: res.data })
             })
     }
 
@@ -30,23 +30,17 @@ export default class AllCustomers extends Component {
     }
 
     handleChange = (e) => {
-        let allCustomerData = this.state.customerList
         let currentList = []
         let newList = []
         if (e.target.value !== '') {
-            for (let i = 0; i < allCustomerData.length; i++) {
-                currentList.push(allCustomerData[i].firstName + ' ' + allCustomerData[i].lastName)
-            }
+            currentList = this.state.customerList
             newList = currentList.filter((item) => {
-                const lowerCaseIncomingItem = item.toLowerCase();
+                const lowerCaseIncomingItem = item.firstName.toLowerCase() + ' ' + item.lastName.toLowerCase();
                 const lowerCaseTextField = e.target.value.toLowerCase();
                 return lowerCaseIncomingItem.includes(lowerCaseTextField)
             })
         } else {
-            for (let i = 0; i < allCustomerData.length; i++) {
-                currentList.push(allCustomerData[i].firstName + ' ' + allCustomerData[i].lastName)
-            }
-            newList = currentList
+            newList = this.state.customerList
         }
         this.setState({filteredList: newList})
     }
@@ -66,7 +60,7 @@ export default class AllCustomers extends Component {
                 <br />
                 <Link to="/customer/create-customer">Add New Client</Link>
                 <br />
-                {this.state.customerList.map((client) => {
+                {this.state.filteredList.map((client) => {
                     const singleCustomerLink = `/customer/${client._id}`
                     const customerId = client._id
                     return (
