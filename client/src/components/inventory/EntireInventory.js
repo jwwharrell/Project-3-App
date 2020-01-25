@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import InventoryCard from '../cards/InventoryCard.js'
+import TextField from '@material-ui/core/TextField'
 
 
 export default class EntireInventory extends Component {
     state = {
-        inventoryList: []
+        inventoryList: [],
+        filteredList: []
     }
 
     componentDidMount() {
@@ -16,7 +18,7 @@ export default class EntireInventory extends Component {
     refreshInventory = () => {
         axios.get('/api/inventory')
             .then((res) => {
-                this.setState({ inventoryList: res.data })
+                this.setState({ inventoryList: res.data, filteredList: res.data })
             })
     }
 
@@ -27,13 +29,36 @@ export default class EntireInventory extends Component {
             })
     }
 
+    handleChange = (e) => {
+        let currentList = []
+        let newList = []
+        if (e.target.value !== '') {
+            currentList = this.state.inventoryList
+            newList = currentList.filter((item) => {
+                const lowerCaseIncomingItem = item.name.toLowerCase()
+                const lowerCaseTextField = e.target.value.toLowerCase()
+                return lowerCaseIncomingItem.includes(lowerCaseTextField)
+            })
+        } else {
+            newList = this.state.inventoryList
+        }
+        this.setState({filteredList: newList})
+    }
+
     render() {
         return (
             <div className='allCards'>
+                <form>
+                    <TextField
+                        id='standard-basic'
+                        label='Search By Item Name'
+                        onChange={this.handleChange}
+                        />
+                </form>
                 <br />
                 <Link to="/inventory/new-piece">Add New Piece To Inventory</Link>
                 <br />
-                {this.state.inventoryList.map((piece) => {
+                {this.state.filteredList.map((piece) => {
                     const pieceLinkId = `/inventory/${piece._id}`
                     const pieceId = piece._id
                     return (
