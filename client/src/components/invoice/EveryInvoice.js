@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import InvoiceCard from '../cards/InvoiceCard'
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 export default class EveryInvoice extends Component {
     state = {
@@ -29,6 +33,14 @@ export default class EveryInvoice extends Component {
     render() {
         return (
             <div className='allCards'>
+                <FormControl component="fieldset" >
+                    <FormLabel component="legend">Show:</FormLabel>
+                    <RadioGroup defaultValue="both">
+                        <FormControlLabel value="paid" control={<Radio />} label="Paid" />
+                        <FormControlLabel value="unpaid" control={<Radio />} label="Unpaid" />
+                        <FormControlLabel value="both" control={<Radio />} label="Both" />
+                    </RadioGroup>
+                </FormControl>
                 <br />
                 <br />
                 {this.state.invoiceList.map((invoice) => {
