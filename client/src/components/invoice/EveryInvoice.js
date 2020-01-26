@@ -9,7 +9,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 export default class EveryInvoice extends Component {
     state = {
-        invoiceList: []
+        invoiceList: [],
+        filteredList: []
     }
 
     componentDidMount() {
@@ -19,7 +20,7 @@ export default class EveryInvoice extends Component {
     refreshInvoice = () => {
         axios.get('/api/invoice')
             .then((res) => {
-                this.setState({ invoiceList: res.data })
+                this.setState({ invoiceList: res.data, filteredList: res.data })
             })
     }
 
@@ -30,20 +31,42 @@ export default class EveryInvoice extends Component {
             })
     }
 
+    handlePaidChange = (e) => {
+        let currentList = []
+        let newList = []
+        if (e.target.value === 'paid') {
+            currentList = this.state.invoiceList
+            newList = currentList.filter((item) => {
+               return item.paymentConfirmed === true
+            })
+        }
+        if (e.target.value === 'unpaid') {
+            currentList = this.state.invoiceList
+            newList = currentList.filter((item) => {
+               return item.paymentConfirmed !== true
+            })
+        }
+        if (e.target.value === 'both') {
+            newList = this.state.invoiceList
+        }
+        this.setState({ filteredList: newList })
+    }
+
+
     render() {
         return (
             <div className='allCards'>
+                <br />
                 <FormControl component="fieldset" >
                     <FormLabel component="legend">Show:</FormLabel>
-                    <RadioGroup defaultValue="both">
+                    <RadioGroup defaultValue="both" onChange={this.handlePaidChange}>
                         <FormControlLabel value="paid" control={<Radio />} label="Paid" />
                         <FormControlLabel value="unpaid" control={<Radio />} label="Unpaid" />
                         <FormControlLabel value="both" control={<Radio />} label="Both" />
                     </RadioGroup>
                 </FormControl>
                 <br />
-                <br />
-                {this.state.invoiceList.map((invoice) => {
+                {this.state.filteredList.map((invoice) => {
                     const linkId = `/all-invoices/${invoice._id}`
                     const invoiceId = invoice._id
                     return (
