@@ -12,9 +12,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
+
 export default class EveryInvoice extends Component {
     state = {
         invoiceList: [],
+        paidFilteredList: [],
+        clientFilteredList: [],
         filteredList: [],
         customerList: []
     }
@@ -26,12 +29,45 @@ export default class EveryInvoice extends Component {
     refreshInvoice = () => {
         axios.get('/api/invoice')
             .then((res) => {
-                this.setState({ invoiceList: res.data, filteredList: res.data })
+                this.setState({ invoiceList: res.data, filteredList: res.data, paidFilteredList: res.data, clientFilteredList: res.data })
             })
         axios.get('/api/customer')
             .then((res) => {
                 this.setState({ customerList: res.data })
             })
+    }
+
+    diffArr = (array1, array2) => {
+        let smallArr = []
+        let bigArr = []
+        let simValues = []
+        
+        if (array1.length === array2.length) {
+          smallArr = array1
+          bigArr = array2
+        }
+        if (array1.length < array2.length) {
+          smallArr = array1
+          bigArr = array2
+        } 
+        if (array1.length > array2.length) {
+          smallArr = array2
+          bigArr = array1
+        }
+        for (let i = 0; i < smallArr.length; i++) {
+          for (let j = 0; j < bigArr.length; j++) {
+            if(smallArr[i] === bigArr[j]) {
+              simValues.push(bigArr[j])
+            } else {
+            }
+          }
+        }
+        return simValues
+    }
+
+    resetFilteredList = () => {
+        const fullList = this.state.invoiceList
+        this.setState({ filteredList: fullList })
     }
 
     onInvoiceDeleteClick = (invoiceId) => {
@@ -45,35 +81,39 @@ export default class EveryInvoice extends Component {
         let currentList = []
         let newList = []
         if (e.target.value === 'paid') {
-            currentList = this.state.filteredList
+            currentList = this.state.invoiceList
             newList = currentList.filter((item) => {
                 return item.paymentConfirmed === true
             })
         }
         if (e.target.value === 'unpaid') {
-            currentList = this.state.filteredList
+            currentList = this.state.invoiceList
             newList = currentList.filter((item) => {
                 return item.paymentConfirmed !== true
             })
         }
         if (e.target.value === 'both') {
-            newList = this.state.filteredList
+            newList = this.state.invoiceList
         }
-        this.setState({ filteredList: newList })
+        let clientFilter = this.state.clientFilteredList
+        let combinedFiltered = this.diffArr(newList, clientFilter)
+        this.setState({ paidFilteredList: newList, filteredList: combinedFiltered })
     }
 
     handleClientNameSelect = (e) => {
         let currentList = []
         let newList = []
         if (e.target.value !== '') {
-            currentList = this.state.filteredList
+            currentList = this.state.invoiceList
             newList = currentList.filter((invoice) => {
                 return invoice.customerId === e.target.value
             })
         } else {
             newList = this.state.invoiceList
         }
-        this.setState({ filteredList: newList })
+        let paidFilter = this.state.paidFilteredList
+        let combinedFiltered = this.diffArr(newList, paidFilter)
+        this.setState({ clientFilteredList: newList, filteredList: combinedFiltered })
     }
 
     onResetFilterClick = (e) => {
