@@ -100,11 +100,6 @@ export default class EveryInvoice extends Component {
                             <FormControlLabel value="both" control={<Radio />} label="All" />
                         </RadioGroup>
                     </FormControl>
-                    <Button
-                        onClick={this.onResetFilterClick}
-                        >
-                        Reset Filters
-                    </Button>
                     <FormControl>
                         <InputLabel htmlFor="client-native-helper">Client</InputLabel>
                         <NativeSelect
@@ -120,6 +115,12 @@ export default class EveryInvoice extends Component {
                         </NativeSelect>
                         <FormHelperText>Filter by client.</FormHelperText>
                     </FormControl>
+                    <Button
+                        onClick={this.onResetFilterClick}
+                        >
+                        Reset Filters
+                    </Button>
+                    
                 </Grid>
                 <br />
                 {this.state.filteredList.map((invoice) => {
