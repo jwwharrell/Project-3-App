@@ -61,7 +61,16 @@ export default class EveryInvoice extends Component {
         this.setState({ filteredList: newList })
     }
 
-    
+    handleClientNameSelect = (e) => {
+        let currentList = []
+        let newList = []
+        if (e.target.value !== '') {
+            currentList = this.state.customerList
+            newList = currentList.filter((client) => {
+                
+            })
+        }
+    }
 
 
     render() {
@@ -84,12 +93,14 @@ export default class EveryInvoice extends Component {
                     </FormControl>
                     <FormControl>
                         <InputLabel htmlFor="client-native-helper">Client</InputLabel>
-                        <NativeSelect>
+                        <NativeSelect
+                            onChange={this.handleClientNameSelect}
+                            >
                             <option value="" />
                             {this.state.customerList.map((client) => {
                                 const clientId = client._id
                                 return (
-                                    <option value={clientId}>{client.firstName} {client.lastName}</option>
+                                    <option value={clientId} key={clientId}>{client.firstName} {client.lastName}</option>
                                 )
                             })}
                         </NativeSelect>
