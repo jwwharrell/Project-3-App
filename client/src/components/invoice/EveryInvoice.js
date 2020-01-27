@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 export default class EveryInvoice extends Component {
     state = {
@@ -44,19 +45,19 @@ export default class EveryInvoice extends Component {
         let currentList = []
         let newList = []
         if (e.target.value === 'paid') {
-            currentList = this.state.invoiceList
+            currentList = this.state.filteredList
             newList = currentList.filter((item) => {
                 return item.paymentConfirmed === true
             })
         }
         if (e.target.value === 'unpaid') {
-            currentList = this.state.invoiceList
+            currentList = this.state.filteredList
             newList = currentList.filter((item) => {
                 return item.paymentConfirmed !== true
             })
         }
         if (e.target.value === 'both') {
-            newList = this.state.invoiceList
+            newList = this.state.filteredList
         }
         this.setState({ filteredList: newList })
     }
@@ -65,11 +66,19 @@ export default class EveryInvoice extends Component {
         let currentList = []
         let newList = []
         if (e.target.value !== '') {
-            currentList = this.state.customerList
-            newList = currentList.filter((client) => {
-                
+            currentList = this.state.filteredList
+            newList = currentList.filter((invoice) => {
+                return invoice.customerId === e.target.value
             })
+        } else {
+            newList = this.state.invoiceList
         }
+        this.setState({ filteredList: newList })
+    }
+
+    onResetFilterClick = (e) => {
+        let resetList = this.state.invoiceList
+        this.setState({ filteredList: resetList })
     }
 
 
@@ -91,6 +100,11 @@ export default class EveryInvoice extends Component {
                             <FormControlLabel value="both" control={<Radio />} label="All" />
                         </RadioGroup>
                     </FormControl>
+                    <Button
+                        onClick={this.onResetFilterClick}
+                        >
+                        Reset Filters
+                    </Button>
                     <FormControl>
                         <InputLabel htmlFor="client-native-helper">Client</InputLabel>
                         <NativeSelect
