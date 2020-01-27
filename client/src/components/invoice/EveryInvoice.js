@@ -65,11 +65,6 @@ export default class EveryInvoice extends Component {
         return simValues
     }
 
-    resetFilteredList = () => {
-        const fullList = this.state.invoiceList
-        this.setState({ filteredList: fullList })
-    }
-
     onInvoiceDeleteClick = (invoiceId) => {
         axios.delete(`/api/invoice/${invoiceId}`)
             .then(() => {
@@ -80,40 +75,47 @@ export default class EveryInvoice extends Component {
     handlePaidChange = (e) => {
         let currentList = []
         let newList = []
+        let allSelected
         if (e.target.value === 'paid') {
+            allSelected = false
             currentList = this.state.invoiceList
             newList = currentList.filter((item) => {
                 return item.paymentConfirmed === true
             })
         }
         if (e.target.value === 'unpaid') {
+            allSelected = false
             currentList = this.state.invoiceList
             newList = currentList.filter((item) => {
                 return item.paymentConfirmed !== true
             })
         }
         if (e.target.value === 'both') {
+            allSelected = true
             newList = this.state.invoiceList
         }
         let clientFilter = this.state.clientFilteredList
         let combinedFiltered = this.diffArr(newList, clientFilter)
-        this.setState({ paidFilteredList: newList, filteredList: combinedFiltered })
+        this.setState({ paidFilteredList: newList, filteredList: combinedFiltered, bothSelected: allSelected })
     }
 
     handleClientNameSelect = (e) => {
         let currentList = []
         let newList = []
+        let allSelected
         if (e.target.value !== '') {
+            allSelected = false
             currentList = this.state.invoiceList
             newList = currentList.filter((invoice) => {
                 return invoice.customerId === e.target.value
             })
         } else {
+            allSelected = true
             newList = this.state.invoiceList
         }
         let paidFilter = this.state.paidFilteredList
         let combinedFiltered = this.diffArr(newList, paidFilter)
-        this.setState({ clientFilteredList: newList, filteredList: combinedFiltered })
+        this.setState({ clientFilteredList: newList, filteredList: combinedFiltered, allClientShowing: allSelected })
     }
 
     onResetFilterClick = (e) => {
@@ -155,12 +157,6 @@ export default class EveryInvoice extends Component {
                         </NativeSelect>
                         <FormHelperText>Filter by client.</FormHelperText>
                     </FormControl>
-                    <Button
-                        onClick={this.onResetFilterClick}
-                        >
-                        Reset Filters
-                    </Button>
-                    
                 </Grid>
                 <br />
                 {this.state.filteredList.map((invoice) => {
