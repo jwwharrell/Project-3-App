@@ -6,11 +6,16 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Grid from '@material-ui/core/Grid';
 
 export default class EveryInvoice extends Component {
     state = {
         invoiceList: [],
-        filteredList: []
+        filteredList: [],
+        customerList: []
     }
 
     componentDidMount() {
@@ -21,6 +26,10 @@ export default class EveryInvoice extends Component {
         axios.get('/api/invoice')
             .then((res) => {
                 this.setState({ invoiceList: res.data, filteredList: res.data })
+            })
+        axios.get('/api/customer')
+            .then((res) => {
+                this.setState({ customerList: res.data })
             })
     }
 
@@ -37,13 +46,13 @@ export default class EveryInvoice extends Component {
         if (e.target.value === 'paid') {
             currentList = this.state.invoiceList
             newList = currentList.filter((item) => {
-               return item.paymentConfirmed === true
+                return item.paymentConfirmed === true
             })
         }
         if (e.target.value === 'unpaid') {
             currentList = this.state.invoiceList
             newList = currentList.filter((item) => {
-               return item.paymentConfirmed !== true
+                return item.paymentConfirmed !== true
             })
         }
         if (e.target.value === 'both') {
@@ -52,19 +61,41 @@ export default class EveryInvoice extends Component {
         this.setState({ filteredList: newList })
     }
 
+    
+
 
     render() {
         return (
             <div className='allCards'>
                 <br />
-                <FormControl component="fieldset" >
-                    <FormLabel component="legend">Show:</FormLabel>
-                    <RadioGroup defaultValue="both" onChange={this.handlePaidChange}>
-                        <FormControlLabel value="paid" control={<Radio />} label="Paid" />
-                        <FormControlLabel value="unpaid" control={<Radio />} label="Unpaid" />
-                        <FormControlLabel value="both" control={<Radio />} label="Both" />
-                    </RadioGroup>
-                </FormControl>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-around"
+                    alignItems="center"
+                >
+                    <FormControl component="fieldset" >
+                        <FormLabel component="legend">Show:</FormLabel>
+                        <RadioGroup defaultValue="both" onChange={this.handlePaidChange}>
+                            <FormControlLabel value="paid" control={<Radio />} label="Paid" />
+                            <FormControlLabel value="unpaid" control={<Radio />} label="Unpaid" />
+                            <FormControlLabel value="both" control={<Radio />} label="All" />
+                        </RadioGroup>
+                    </FormControl>
+                    <FormControl>
+                        <InputLabel htmlFor="client-native-helper">Client</InputLabel>
+                        <NativeSelect>
+                            <option value="" />
+                            {this.state.customerList.map((client) => {
+                                const clientId = client._id
+                                return (
+                                    <option value={clientId}>{client.firstName} {client.lastName}</option>
+                                )
+                            })}
+                        </NativeSelect>
+                        <FormHelperText>Filter by client.</FormHelperText>
+                    </FormControl>
+                </Grid>
                 <br />
                 {this.state.filteredList.map((invoice) => {
                     const linkId = `/all-invoices/${invoice._id}`
