@@ -187,7 +187,6 @@ export default class SingleInventoryItem extends Component {
                         />
                         <select
                             onChange={this.onNewCustomerHoldChange}
-                            defaultValue={customer.firstName + ' ' + customer.lastName}
                         >
                             <option
                             >--Assign To Client--</option>
