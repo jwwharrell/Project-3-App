@@ -6,6 +6,9 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export default class SingleCustomer extends Component {
 
@@ -105,24 +108,18 @@ export default class SingleCustomer extends Component {
                             <Typography className='title' color="textSecondary" gutterBottom>
                                 Invoices:
                             </Typography>
-                            <Typography variant="body1" component="p">
+                            <List component="nav" aria-label='invoices for client'>
                                 {this.state.invoiceList.map((invoice) => {
                                     const singleInvoiceLink = `/all-invoices/${invoice._id}`
                                     return (
-                                        <div>
-                                            <ul>
-                                                <li>
-                                                    <Link to={singleInvoiceLink}>
-                                                        <Typography variant="body1" component="p">
-                                                            {invoice.notes}
-                                                        </Typography>
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <Link to={singleInvoiceLink} key={invoice._id}>
+                                            <ListItem button>
+                                                <ListItemText primary={invoice.notes} />
+                                            </ListItem>
+                                        </Link>
                                     )
                                 })}
-                            </Typography>
+                            </List>
                         </CardContent>
                         <CardActions>
                             <Link to={addInvoiceLink}>
