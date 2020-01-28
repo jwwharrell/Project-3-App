@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import moment from 'moment'
 
 export default class SingleInvoice extends Component {
     state = {
@@ -105,7 +106,7 @@ export default class SingleInvoice extends Component {
                                 Date of Service:
                             </Typography>
                             <Typography variant="body1" component="p">
-                                {selectedInvoice.dateOfService}
+                                {moment(selectedInvoice.dateOfService).format('MMMM Do YYYY')}
                             </Typography>
                         </CardContent>
                     </Card>
