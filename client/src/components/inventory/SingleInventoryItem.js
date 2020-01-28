@@ -23,23 +23,34 @@ export default class SingleInventoryItem extends Component {
 
     componentDidMount() {
         this.refreshItem()
-        this.getAllCostumersForDropDown()
     }
 
     refreshItem = () => {
         const item = this.props.match.params.inventoryId
+        let updatedItem
+        let allCustomers
+        let holderOfPiece
+
         axios.get(`/api/inventory/${item}`)
             .then((res) => {
-                this.setState({ updatedItem: res.data })
+                updatedItem = res.data
+                axios.get('/api/customer')
+                    .then((res) => {
+                        allCustomers = res.data
+                        for (let i = 0; i < allCustomers.length; i++) {
+                            if (updatedItem.customerId === allCustomers[i]._id) {
+                                holderOfPiece = allCustomers[i]
+                            }
+                        }
+                        this.setState({
+                            updatedItem: updatedItem,
+                            allCostumers: allCustomers,
+                            holderOfPiece: holderOfPiece
+                        })
+                    })
             })
-
-    }
-
-    getAllCostumersForDropDown = () => {
-        axios.get('/api/customer')
-            .then((res) => {
-                this.setState({ allCostumers: res.data })
-            })
+        
+        
     }
 
     onUpdateItem = (event) => {
@@ -93,6 +104,8 @@ export default class SingleInventoryItem extends Component {
         }
     }
 
+
+
     render() {
         const selectedItem = this.state.updatedItem
         const customer = this.state.holderOfPiece
@@ -137,7 +150,7 @@ export default class SingleInventoryItem extends Component {
                                 Current Holder of Piece:
                             </Typography>
                             <Typography variant="h5" component="h2">
-                               <Link to={singleCustomerLink}>{customer.firstName} {customer.lastName}</Link>
+                                <Link to={singleCustomerLink}>{customer.firstName} {customer.lastName}</Link>
                             </Typography>
                         </CardContent>
                     </Card>
@@ -174,6 +187,7 @@ export default class SingleInventoryItem extends Component {
                         />
                         <select
                             onChange={this.onNewCustomerHoldChange}
+                            defaultValue={customer.firstName + ' ' + customer.lastName}
                         >
                             <option
                             >--Assign To Client--</option>
@@ -186,6 +200,7 @@ export default class SingleInventoryItem extends Component {
                                     >{customer.firstName} {customer.lastName}</option>
                                 )
                             })}
+                            <option>Test</option>
                         </select>
                         <input
                             type='submit'
