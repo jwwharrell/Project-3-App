@@ -206,7 +206,6 @@ export default class SingleInventoryItem extends Component {
                                     >{customer.firstName} {customer.lastName}</option>
                                 )
                             })}
-                            <option>Test</option>
                         </select>
                         <input
                             type='submit'

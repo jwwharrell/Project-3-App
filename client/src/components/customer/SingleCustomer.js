@@ -120,7 +120,11 @@ export default class SingleCustomer extends Component {
                                     {this.state.heldItems.map((item) => {
                                         const singleItemLink = `/inventory/${item._id}`
                                         return (
-                                                <Link key={item._id} to={singleItemLink}>{item.name}</Link>
+                                            <Link key={item._id} to={singleItemLink}>
+                                                <ListItem button>
+                                                    <ListItemText primary={item.name} />
+                                                </ListItem>
+                                            </Link>
                                         )
                                     })}
                                 </Typography>
