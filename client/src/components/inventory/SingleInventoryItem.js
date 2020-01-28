@@ -37,10 +37,14 @@ export default class SingleInventoryItem extends Component {
                 axios.get('/api/customer')
                     .then((res) => {
                         allCustomers = res.data
-                        for (let i = 0; i < allCustomers.length; i++) {
-                            if (updatedItem.customerId === allCustomers[i]._id) {
-                                holderOfPiece = allCustomers[i]
+                        if (updatedItem.customerId !== '') {
+                            for (let i = 0; i < allCustomers.length; i++) {
+                                if (updatedItem.customerId === allCustomers[i]._id) {
+                                    holderOfPiece = allCustomers[i]
+                                }
                             }
+                        } else {
+                            holderOfPiece = ''
                         }
                         this.setState({
                             updatedItem: updatedItem,
@@ -49,8 +53,8 @@ export default class SingleInventoryItem extends Component {
                         })
                     })
             })
-        
-        
+
+
     }
 
     onUpdateItem = (event) => {
@@ -109,7 +113,6 @@ export default class SingleInventoryItem extends Component {
     render() {
         const selectedItem = this.state.updatedItem
         const customer = this.state.holderOfPiece
-        const singleCustomerLink = `/customer/${customer._id}`
 
         return (
             <div className='singleView'>
@@ -144,16 +147,20 @@ export default class SingleInventoryItem extends Component {
                             </Typography>
                         </CardContent>
                     </Card>
+                    {this.state.holderOfPiece ? 
                     <Card className='card' variant='outlined'>
                         <CardContent>
                             <Typography className='title' color="textSecondary" gutterBottom>
-                                Current Holder of Piece:
+                                Current Holder:
                             </Typography>
                             <Typography variant="h5" component="h2">
-                                <Link to={singleCustomerLink}>{customer.firstName} {customer.lastName}</Link>
+                                <Link to={`/customer/${customer._id}`}>{customer.firstName} {customer.lastName}</Link>
                             </Typography>
                         </CardContent>
                     </Card>
+                    : null
+                    }
+                    
                 </Grid>
                 <div className="form-container">
                     <form onSubmit={this.onUpdateItem}>
