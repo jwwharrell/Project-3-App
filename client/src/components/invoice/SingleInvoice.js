@@ -133,6 +133,7 @@ export default class SingleInvoice extends Component {
                                 name="newPaymentConfirmed"
                                 onChange={this.onNewPaymentConfirmedChange}
                                 value={true}
+                                checked={this.state.updatedInvoice.paymentConfirmed}
                             /> Yes
                         </span>
                         <span>
@@ -141,6 +142,7 @@ export default class SingleInvoice extends Component {
                                 name="newPaymentConfirmed"
                                 onChange={this.onNewPaymentConfirmedChange}
                                 value={false}
+                                checked={!this.state.updatedInvoice.paymentConfirmed}
                             /> No
                         </span>
                         <br />
