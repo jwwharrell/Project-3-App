@@ -88,6 +88,7 @@ input[type=submit]:hover {
 .card {
   min-width: 275px;
   max-width: 400px;
+  margin: 5px;
 }
 
 .card-paid {

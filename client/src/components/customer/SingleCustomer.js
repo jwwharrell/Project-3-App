@@ -79,23 +79,6 @@ export default class SingleCustomer extends Component {
                     <Card className='card' variant='outlined'>
                         <CardContent>
                             <Typography className='title' color="textSecondary" gutterBottom>
-                                Holding Current Items:
-                            </Typography>
-                            <Typography variant="body1" component="p">
-                                {this.state.heldItems.map((item) => {
-                                    const singleItemLink = `/inventory/${item._id}`
-                                    return (
-                                        <div>
-                                            <Link to={singleItemLink}>{item.name}</Link>
-                                        </div>
-                                    )
-                                })}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                    <Card className='card' variant='outlined'>
-                        <CardContent>
-                            <Typography className='title' color="textSecondary" gutterBottom>
                                 Style Profile:
                             </Typography>
                             <Typography variant="h5" component="h2">
@@ -127,6 +110,23 @@ export default class SingleCustomer extends Component {
                             </Link>
                         </CardActions>
                     </Card>
+                    {this.state.heldItems.length === 0 ? null :
+                        <Card className='card' variant='outlined'>
+                            <CardContent>
+                                <Typography className='title' color="textSecondary" gutterBottom>
+                                    Holding Current Items:
+                            </Typography>
+                                <Typography variant="body1" component="p">
+                                    {this.state.heldItems.map((item) => {
+                                        const singleItemLink = `/inventory/${item._id}`
+                                        return (
+                                                <Link key={item._id} to={singleItemLink}>{item.name}</Link>
+                                        )
+                                    })}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    }
                 </Grid>
                 <div className="form-container">
                     <form onSubmit={this.onUpdateCustomer}>
