@@ -1,4 +1,4 @@
-<h1>Client Cheackout App</h1>
+<h1>Client Checkout App</h1>
 
 <h2>Overview</h2>
 
