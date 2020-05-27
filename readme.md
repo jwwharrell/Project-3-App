@@ -14,7 +14,7 @@
 <br>
 
 <h2>ERD</h2>
-<img src="./images/ERD.jpg" alt="Picture of project ERD"/>
+![Picture of project ERD](images/ERD.jpg)
 <br>
 
 <h2>Wireframe</h2>
